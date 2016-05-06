@@ -1,0 +1,3 @@
+[submodule "sleuth-documentation-apps"]
+	path = sleuth-documentation-apps
+	url = git@github.com:spring-cloud-samples/sleuth-documentation-apps.git

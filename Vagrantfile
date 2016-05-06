@@ -22,12 +22,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider "vmware_fusion" do |v, override|
-     ## the puppetlabs ubuntu 14-04 image might work on vmware, not tested? 
+     ## the puppetlabs ubuntu 14-04 image might work on vmware, not tested?
     v.provision "shell", path: 'ubuntu.sh'
     v.box = "phusion/ubuntu-14.04-amd64"
     v.vmx["numvcpus"] = "2"
     v.vmx["memsize"] = "2048"
   end
   config.vm.provision "shell", path: 'setup.sh'
-  config.vm.provision "puppet",  manifest_file: "default.pp"
+  config.vm.provision "puppet",  manifest_file: "default.pp",  options: "--verbose --debug"
 end

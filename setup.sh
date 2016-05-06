@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# this script installs the puppet modules we need, 
+# this script installs the puppet modules we need,
 #and tries to do tricks with setting local repository for ubuntu updates
 
 # Install wget
@@ -9,14 +9,14 @@ sudo apt-get install -qy wget;
 sed -e '/templatedir/ s/^#*/#/' -i.back /etc/puppet/puppet.conf
 
 ## set local/fastest mirror and local timezone
-mv /etc/apt/sources.list /etc/apt/sources.list.orig
-cat > /etc/apt/sources.list <<EOF
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse
-
-EOF
+# mv /etc/apt/sources.list /etc/apt/sources.list.orig
+# cat > /etc/apt/sources.list <<EOF
+# deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse
+# deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse
+# deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse
+# deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse
+#
+# EOF
 sudo apt-get update
 export tz=`wget -qO - http://geoip.ubuntu.com/lookup | sed -n -e 's/.*<TimeZone>\(.*\)<\/TimeZone>.*/\1/p'` &&  sudo timedatectl set-timezone $tz
 
@@ -31,10 +31,10 @@ if [ ! -d /etc/puppet/modules/java ]; then
  puppet module install puppetlabs-java
 fi
 if [ ! -d /etc/puppet/modules/elasticsearch ]; then
- puppet module install elasticsearch-elasticsearch
+ puppet module install elasticsearch-elasticsearch --version 0.10.2
 fi
 if [ ! -d /etc/puppet/modules/logstash ]; then
- puppet module install elasticsearch-logstash
+ puppet module install elasticsearch-logstash --version 0.5.1
 fi
 if [ ! -f /etc/init.d/kibana ]; then
  sudo cp /vagrant/kibana4_init /etc/init.d/kibana
