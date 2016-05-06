@@ -48,10 +48,10 @@ class { 'logstash':
 }
 
 # remove initial logstash config
-#file { '/etc/logstash/conf.d/logstash':
-  #ensure  => '/vagrant/confs/logstash/logstash.conf',
- # require => [ Class['logstash'] ],
-#}
+file { '/etc/logstash/conf.d/logstash':
+  ensure  => '/vagrant/confs/logstash/logstash.conf',
+  require => [ Class['logstash'] ],
+}
 
 
 # Kibana
@@ -75,3 +75,8 @@ exec { 'download_kibana':
 exec {'start kibana':
     command => '/etc/init.d/kibana start',
 }
+
+#exec { 'run_logstash_with_custom_config':
+#  command => '/opt/logstash/bin/logstash agent -f /vagrant/confs/logstash/logstash.conf',
+#  require => [ Class['logstash'] ],
+#}

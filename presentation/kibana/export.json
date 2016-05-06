@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "DEFAULT",
+    "_type": "search",
+    "_source": {
+      "title": "DEFAULT",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "severity",
+        "service",
+        "trace",
+        "span",
+        "exportable",
+        "pid",
+        "thread",
+        "class",
+        "rest"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  }
+]
