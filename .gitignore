@@ -186,3 +186,4 @@ logs/
 tmp/
 project/
 esbackups/
+.idea
