@@ -3,6 +3,7 @@
 WAIT_TIME="${WAIT_TIME:-5}"
 RETRIES="${RETRIES:-70}"
 SERVICE1_PORT="${SERVICE1_PORT:-8081}"
+ZIPKIN_PORT="${ZIPKIN_PORT:-9411}"
 
 # ${RETRIES} number of times will try to curl to /health endpoint to passed port $1 and localhost
 function curl_local_health_endpoint() {
@@ -30,6 +31,14 @@ vagrant up
 
 # Next run the `./runApps.sh` script to initialize Zipkin and the apps (check the `README` of `sleuth-documentation-apps` for Docker setup info)
 ./runApps.sh
+
+READY_FOR_TESTS="no"
+curl_local_health_endpoint $ZIPKIN_PORT && READY_FOR_TESTS="yes"
+
+if [[ "${READY_FOR_TESTS}" == "no" ]] ; then
+    echo "Failed to start Zipkin service"
+    exit 1
+fi
 
 READY_FOR_TESTS="no"
 curl_local_health_endpoint $SERVICE1_PORT && READY_FOR_TESTS="yes"
