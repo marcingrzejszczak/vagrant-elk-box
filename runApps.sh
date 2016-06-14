@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 echo -e "Starting Zipkin and the Apps"
 
 cd sleuth-documentation-apps

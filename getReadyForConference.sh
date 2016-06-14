@@ -50,7 +50,6 @@ fi
 # Next run the `./runApps.sh` script to initialize Zipkin and the apps (check the `README` of `sleuth-documentation-apps` for Docker setup info)
 ./runApps.sh
 
-
 echo -e "\n\nChecking if Zipkin is alive"
 check_app $ZIPKIN_PORT
 echo -e "\n\nChecking if Service1 is alive"
