@@ -13,7 +13,7 @@ RUN_VAGRANT="${RUN_VAGRANT:-yes}"
 
 function print_logs() {
     echo -e "\n\nPRINTING LOGS FROM ALL APPS\n\n"
-    cat sleuth-documentation-apps/build/*.log
+    tail -n +1 -- sleuth-documentation-apps/build/*.log
 }
 
 # ${RETRIES} number of times will try to curl to /health endpoint to passed port $1 and localhost
