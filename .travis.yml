@@ -3,6 +3,6 @@ jdk:
   - oraclejdk8
 before_install:
   - wget https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4_x86_64.deb
-  - sudo dpkg -i pngquant_1.7.1-1_i386.deb
+  - sudo dpkg -i vagrant_1.8.4_x86_64.deb
 script:
   - ./getReadyForConference.sh
