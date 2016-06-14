@@ -9,6 +9,7 @@ SERVICE2_PORT="${SERVICE2_PORT:-8082}"
 SERVICE3_PORT="${SERVICE3_PORT:-8083}"
 SERVICE4_PORT="${SERVICE4_PORT:-8084}"
 ZIPKIN_PORT="${ZIPKIN_PORT:-9411}"
+RUN_VAGRANT="${RUN_VAGRANT:-yes}"
 
 # ${RETRIES} number of times will try to curl to /health endpoint to passed port $1 and localhost
 function curl_local_health_endpoint() {
@@ -40,7 +41,11 @@ function check_app() {
 ./setupPresentationRepo.sh
 
 # Next start the ELK vagrant box with `vagrant up`
-vagrant up
+if [[ "${RUN_VAGRANT}" == "yes" ]] ; then
+    vagrant up
+else
+    echo -e "\n\nSkipping vagrant setup"
+fi
 
 # Next run the `./runApps.sh` script to initialize Zipkin and the apps (check the `README` of `sleuth-documentation-apps` for Docker setup info)
 ./runApps.sh
