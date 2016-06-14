@@ -10,7 +10,7 @@ jdk:
   #- wget https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4_x86_64.deb
   #- sudo dpkg -i vagrant_1.8.4_x86_64.deb
 script:
-  - cd sleuth-documentation-apps && ./gradldew clean build --parallel
+  - cd sleuth-documentation-apps && ./gradlew clean build --parallel
 env:
   global:
   - TERM=dumb
