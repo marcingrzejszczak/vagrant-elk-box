@@ -3,13 +3,18 @@
 set -e
 
 WAIT_TIME="${WAIT_TIME:-5}"
-RETRIES="${RETRIES:-70}"
+RETRIES="${RETRIES:-30}"
 SERVICE1_PORT="${SERVICE1_PORT:-8081}"
 SERVICE2_PORT="${SERVICE2_PORT:-8082}"
 SERVICE3_PORT="${SERVICE3_PORT:-8083}"
 SERVICE4_PORT="${SERVICE4_PORT:-8084}"
 ZIPKIN_PORT="${ZIPKIN_PORT:-9411}"
 RUN_VAGRANT="${RUN_VAGRANT:-yes}"
+
+function print_logs() {
+    echo -e "\n\nPRINTING LOGS FROM ALL APPS\n\n"
+    cat sleuth-documentation-apps/build/*.log
+}
 
 # ${RETRIES} number of times will try to curl to /health endpoint to passed port $1 and localhost
 function curl_local_health_endpoint() {
@@ -33,6 +38,7 @@ function check_app() {
     curl_local_health_endpoint $1 && READY_FOR_TESTS="yes"
     if [[ "${READY_FOR_TESTS}" == "no" ]] ; then
         echo "Failed to start service running at port $1"
+        print_logs
         exit 1
     fi
 }
@@ -63,8 +69,8 @@ check_app $SERVICE4_PORT
 
 echo -e "\n\nReady to curl first request"
 
-./sleuth-documentation-apps/scripts/curl_start.sh
+./sleuth-documentation-apps/scripts/curl_start.sh || echo "Failed to send the request" && print_logs && exit 1
 
 echo -e "\n\nReady to curl a request that will cause an exception"
 
-./sleuth-documentation-apps/scripts/curl_exception.sh && echo -e "\n\nShould have failed the request but didn't :/" && exit 1 || echo -e "\n\nSent a request and got an exception!"
+./sleuth-documentation-apps/scripts/curl_exception.sh && echo -e "\n\nShould have failed the request but didn't :/" && print_logs && exit 1 || echo -e "\n\nSent a request and got an exception!"
