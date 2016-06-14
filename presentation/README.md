@@ -13,3 +13,4 @@ To manually run logstash and pass the configuration file just type
 ```
 /opt/logstash/bin/logstash agent -f /vagrant/confs/logstash/logstash.conf
 ```
+
