@@ -2,6 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 before_install:
+  - sudo apt-get install virtualbox
   - wget https://releases.hashicorp.com/vagrant/1.8.4/vagrant_1.8.4_x86_64.deb
   - sudo dpkg -i vagrant_1.8.4_x86_64.deb
 script:
