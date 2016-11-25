@@ -30,4 +30,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.provision "shell", path: 'setup.sh'
   config.vm.provision "puppet",  manifest_file: "default.pp",  options: "--verbose --debug"
+  config.vm.synced_folder "../", "/workshops"
 end
