@@ -28,7 +28,7 @@ if [ ! -d /etc/puppet/modules/apt ]; then
  puppet module install puppetlabs-apt --version 1.8.0
 fi
 if [ ! -d /etc/puppet/modules/java ]; then
- puppet module install puppetlabs-java
+ puppet module install puppetlabs-java --version 1.6.0
 fi
 if [ ! -d /etc/puppet/modules/elasticsearch ]; then
  puppet module install elasticsearch-elasticsearch --version 0.10.2
